@@ -2,6 +2,7 @@ package org.example.Entity;
 
 import org.example.GamePanel;
 import org.example.KeyHandler;
+import org.example.tile.Tile;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -12,6 +13,8 @@ public class Player extends Entity {
 
     GamePanel gp;
     KeyHandler keyH;
+    Tile[] tile;
+    Tile grass = new Tile();
 
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
@@ -22,7 +25,6 @@ public class Player extends Entity {
         x = 200;
         y = 200;
         speed = 4;
-        size = 32;
         direction = "down";
         spriteNum = 1;
     }
@@ -48,7 +50,6 @@ public class Player extends Entity {
         } else isMoving = false;
 
         spriteCounter++;
-        System.out.println("Sprite Counter is " + spriteCounter);
         if(spriteCounter > 10) {
             if(spriteNum == 1 && isMoving) {
                 spriteNum = 2;
@@ -116,6 +117,6 @@ public class Player extends Entity {
                 break;
         }
 
-        g2.drawImage(image,x, y, size, size, null);
+        g2.drawImage(image,x, y, gp.realTileSize, gp.realTileSize, null);
     }
 }

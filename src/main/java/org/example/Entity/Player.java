@@ -9,7 +9,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public class Player extends Entity {
+public class Player extends org.example.Entity.Entity {
 
     GamePanel gp;
     KeyHandler keyH;
@@ -22,8 +22,8 @@ public class Player extends Entity {
     }
 
     public void setDefaultValues() {
-        x = 200;
-        y = 200;
+        x = gp.screenWidth / 2 - (gp.realTileSize / 2);
+        y = gp.screenHeight / 2 - (gp.realTileSize / 2);
         speed = 4;
         direction = "down";
         spriteNum = 1;
@@ -32,16 +32,12 @@ public class Player extends Entity {
     public void update() {
         if(keyH.upPressed) {
             direction = "up";
-            y -= speed;
         } else if(keyH.downPressed) {
             direction = "down";
-            y += speed;
         } else if(keyH.rightPressed) {
             direction = "right";
-            x += speed;
         } else if(keyH.leftPressed) {
             direction = "left";
-            x -= speed;
         }
 
         boolean isMoving;

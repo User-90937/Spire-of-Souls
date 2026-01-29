@@ -14,12 +14,14 @@ public class TileManager {
     Tile[] tile;
     GamePanel gp;
     int mapTileNum[][];
+    int worldCol = 50;
+    int worldRow = 50;
 
     public TileManager(GamePanel gp) {
         this.gp = gp;
 
         tile = new Tile[5];
-        mapTileNum = new int[gp.maxScreenCol][gp.maxScreenRow];
+        mapTileNum = new int[worldCol][worldRow];
         getTileImage();
         loadMap();
     }
@@ -45,12 +47,13 @@ public class TileManager {
         int col = 0;
         int row = 0;
 
-        while (col < gp.maxScreenCol && row < gp.maxScreenRow) {
+        while (col < worldCol && row < worldRow) {
 
             try {
                 String line = br.readLine();
+                System.out.println(line);
 
-                while (col < gp.maxScreenCol) {
+                while (col < worldCol) {
 
                     String numbers[] = line.split(" ");
 
@@ -59,7 +62,7 @@ public class TileManager {
                     mapTileNum[col][row] = num;
                     col++;
                 }
-                if (col == gp.maxScreenCol) {
+                if (col == worldCol) {
                     col = 0;
                     row++;
                 }
@@ -81,7 +84,7 @@ public class TileManager {
         int x = 0;
         int y = 0;
 
-        while (col < gp.maxScreenCol && row < gp.maxScreenRow) {
+        while (col < worldCol && row < worldRow) {
 
             int tileNum = mapTileNum[col][row];
 
@@ -89,7 +92,7 @@ public class TileManager {
             col++;
             x += gp.realTileSize;
 
-            if(col == gp.maxScreenCol) {
+            if(col == worldCol) {
                 col = 0;
                 x = 0;
                 row++;

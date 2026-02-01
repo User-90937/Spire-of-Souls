@@ -1,5 +1,6 @@
-package org.example.Entity;
+package org.example.entity;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Entity {
@@ -10,4 +11,6 @@ public class Entity {
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
     public int spriteNum = 1;
     public int spriteCounter;
+    public Rectangle solidArea;
+    public boolean collisionOn = false;
 }

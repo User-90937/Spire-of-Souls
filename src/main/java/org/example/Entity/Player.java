@@ -1,4 +1,4 @@
-package org.example.Entity;
+package org.example.entity;
 
 import org.example.GamePanel;
 import org.example.KeyHandler;
@@ -8,7 +8,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public class Player extends org.example.Entity.Entity {
+public class Player extends org.example.entity.Entity {
 
     GamePanel gp;
     KeyHandler keyH;
@@ -22,6 +22,8 @@ public class Player extends org.example.Entity.Entity {
 
         screenX = gp.screenWidth / 2 - (gp.realTileSize / 2);
         screenY = gp.screenHeight / 2 - (gp.realTileSize / 2);
+
+        solidArea = new Rectangle(8, 16, 32, 32);
     }
 
     public void setDefaultValues() {
@@ -34,22 +36,31 @@ public class Player extends org.example.Entity.Entity {
     public void update() {
         if(keyH.upPressed) {
             direction = "up";
-            worldY -= speed;
         } else if(keyH.downPressed) {
             direction = "down";
-            worldY += speed;
         } else if(keyH.rightPressed) {
             direction = "right";
-            worldX += speed;
         } else if(keyH.leftPressed) {
             direction = "left";
-            worldX -= speed;
         }
 
         boolean isMoving;
         if(keyH.downPressed || keyH.leftPressed || keyH.rightPressed || keyH.upPressed) {
             isMoving = true;
         } else isMoving = false;
+
+        collisionOn = false;
+        gp.cChecker.checkTile(this);
+
+        if(!collisionOn && isMoving) {
+
+            switch(direction) {
+                case "up": worldY -= speed; break;
+                case "down": worldY += speed; break;
+                case "right": worldX += speed; break;
+                case "left": worldX -= speed; break;
+            }
+        }
 
         spriteCounter++;
         if(spriteCounter > 10) {

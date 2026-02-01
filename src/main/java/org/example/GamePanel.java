@@ -1,6 +1,6 @@
 package org.example;
 
-import org.example.Entity.Player;
+import org.example.entity.Player;
 import org.example.tile.TileManager;
 
 import javax.swing.*;
@@ -27,9 +27,10 @@ public class GamePanel extends JPanel implements Runnable{
     Thread gameThread;
     public Player player = new Player(this, keyH);
     TileManager tileManager = new TileManager(this);
+    public CollisionChecker cChecker = new CollisionChecker(this);
 
     public GamePanel() {
-        this.setBackground(Color.DARK_GRAY);
+        this.setBackground(Color.pink);
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);

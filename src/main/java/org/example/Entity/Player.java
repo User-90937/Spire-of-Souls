@@ -2,7 +2,6 @@ package org.example.Entity;
 
 import org.example.GamePanel;
 import org.example.KeyHandler;
-import org.example.tile.Tile;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -13,31 +12,38 @@ public class Player extends org.example.Entity.Entity {
 
     GamePanel gp;
     KeyHandler keyH;
-    Tile[] tile;
-    Tile grass = new Tile();
+
+    public final int screenX;
+    public final int screenY;
 
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
         this.keyH = keyH;
+
+        screenX = gp.screenWidth / 2 - (gp.realTileSize / 2);
+        screenY = gp.screenHeight / 2 - (gp.realTileSize / 2);
     }
 
     public void setDefaultValues() {
-        x = gp.screenWidth / 2 - (gp.realTileSize / 2);
-        y = gp.screenHeight / 2 - (gp.realTileSize / 2);
+        worldX = gp.realTileSize * 23;
+        worldY = gp.realTileSize * 21;
         speed = 4;
         direction = "down";
-        spriteNum = 1;
     }
 
     public void update() {
         if(keyH.upPressed) {
             direction = "up";
+            worldY -= speed;
         } else if(keyH.downPressed) {
             direction = "down";
+            worldY += speed;
         } else if(keyH.rightPressed) {
             direction = "right";
+            worldX += speed;
         } else if(keyH.leftPressed) {
             direction = "left";
+            worldX -= speed;
         }
 
         boolean isMoving;
@@ -113,6 +119,6 @@ public class Player extends org.example.Entity.Entity {
                 break;
         }
 
-        g2.drawImage(image,x, y, gp.realTileSize, gp.realTileSize, null);
+        g2.drawImage(image,screenX, screenY, gp.realTileSize, gp.realTileSize, null);
     }
 }

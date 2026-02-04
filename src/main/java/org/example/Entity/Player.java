@@ -107,13 +107,20 @@ public class Player extends org.example.entity.Entity {
                 case "Key":
                     keyAmt++;
                     gp.obj[i] = null;
+                    gp.playSE(1);
                     System.out.println("Key Amount: " + keyAmt);
                     break;
                 case "Door":
                     if(keyAmt > 0) {
                         gp.obj[i] = null;
                         keyAmt--;
+                        gp.playSE(3);
                     }
+                    break;
+                case "Boots":
+                        gp.obj[i] = null;
+                        speed+=2;
+                        gp.playSE(2);
                     break;
             }
         }

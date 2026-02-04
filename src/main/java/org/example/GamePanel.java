@@ -1,6 +1,8 @@
 package org.example;
 
 import org.example.entity.Player;
+import org.example.object.OBJ_Key;
+import org.example.object.SuperObject;
 import org.example.tile.TileManager;
 
 import javax.swing.*;
@@ -26,8 +28,10 @@ public class GamePanel extends JPanel implements Runnable{
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
     public Player player = new Player(this, keyH);
+    public SuperObject obj[] = new SuperObject[10];
     TileManager tileManager = new TileManager(this);
     public CollisionChecker cChecker = new CollisionChecker(this);
+    public AssetSetter aSetter = new AssetSetter(this);
 
     public GamePanel() {
         this.setBackground(Color.pink);
@@ -35,6 +39,10 @@ public class GamePanel extends JPanel implements Runnable{
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
+    }
+
+    public void setupGame() {
+        aSetter.setObject();
     }
 
     public void startGameThread() {
@@ -88,6 +96,12 @@ public class GamePanel extends JPanel implements Runnable{
 
         tileManager.drawTile(g2);
         player.draw(g2);
+
+        for(int i = 0; i < obj.length; i++) {
+            if(obj[i] != null) {
+                obj[i].draw(g2, this);
+            }
+        }
 
         g2.dispose();
 

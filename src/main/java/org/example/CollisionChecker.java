@@ -44,7 +44,6 @@ public class CollisionChecker {
             case "left":
                 entityLeftCol = (entityLeftWorldX - entity.speed) / gp.realTileSize;
                 tileNum1 = gp.tileManager.mapTileNum[entityLeftCol][entityTopRow];
-                System.out.println(entityTopRow);
                 tileNum2 = gp.tileManager.mapTileNum[entityLeftCol][entityBottomRow];
                 if(gp.tileManager.tile[tileNum1].collison || gp.tileManager.tile[tileNum2].collison) {
                     entity.collisionOn = true;

@@ -24,11 +24,13 @@ public class GamePanel extends JPanel implements Runnable{
 
     KeyHandler keyH = new KeyHandler();
     Sound sound = new Sound();
+    Sound music = new Sound();
     public Player player = new Player(this, keyH);
     public SuperObject obj[] = new SuperObject[10];
     TileManager tileManager = new TileManager(this);
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter aSetter = new AssetSetter(this);
+    public UI ui = new UI(this);
     Thread gameThread;
 
     public GamePanel() {
@@ -96,6 +98,7 @@ public class GamePanel extends JPanel implements Runnable{
 
         tileManager.drawTile(g2);
         player.draw(g2);
+        ui.draw(g2);
 
         for(int i = 0; i < obj.length; i++) {
             if(obj[i] != null) {
@@ -108,13 +111,13 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
     public void playMusic(int i) {
-        sound.setFile(i);
-        sound.play();
-        sound.loop();
+        music.setFile(i);
+        music.play();
+        music.loop();
     }
 
     public void stopMusic() {
-        sound.stop();
+        music.stop();
     }
 
     public void playSE(int i) {
